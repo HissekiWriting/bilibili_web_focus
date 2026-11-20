@@ -1,0 +1,12 @@
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"] {
+  overflow: hidden !important;
+}
+
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"] body {
+  visibility: hidden !important;
+}
+
+/*
+ * Feature selectors for top bars, recommendations, comments, and search
+ * suggestions will be added here behind the same reversible root state.
+ */

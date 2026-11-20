@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Bilibili Web Focus",
+  "version": "0.1.0",
+  "description": "专注浏览 B 站：隐藏推荐与干扰内容。",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_title": "Bilibili Web Focus",
+    "default_popup": "ext/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.bilibili.com/*"
+      ],
+      "css": [
+        "ext/content/core.css"
+      ],
+      "js": [
+        "ext/content/index.js"
+      ],
+      "run_at": "document_start"
+    }
+  ]
+}

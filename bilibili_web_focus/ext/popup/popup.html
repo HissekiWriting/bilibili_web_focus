@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bilibili Web Focus</title>
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" defer></script>
+  </head>
+  <body>
+    <main class="panel">
+      <div class="header">
+        <div class="copy">
+          <h1>Bilibili Focus</h1>
+          <p id="status" class="status" aria-live="polite">正在读取...</p>
+        </div>
+        <label class="switch" aria-label="启用专注模式">
+          <input id="enabled" type="checkbox">
+          <span class="track" aria-hidden="true">
+            <span class="thumb"></span>
+          </span>
+        </label>
+      </div>
+      <p class="note">设置会同步到已打开的 B 站页面</p>
+    </main>
+  </body>
+</html>
