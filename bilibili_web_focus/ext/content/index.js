@@ -15,6 +15,7 @@
   let lastUrl = "";
   let routeRefreshQueued = false;
 
+  // 将当前 URL 归类为首页、视频页或其他页面。
   function getPageType() {
     try {
       const url = new URL(window.location.href);
@@ -37,6 +38,7 @@
     return PAGE.OTHER;
   }
 
+  // 将开关和页面类型写入根节点，供 CSS 选择器使用。
   function applyPageState() {
     const root = document.documentElement;
 
@@ -48,6 +50,7 @@
     root.dataset.biliFocusPage = getPageType();
   }
 
+  // URL 变化时重新计算页面状态，force 用于首次初始化。
   function refreshRoute(force = false) {
     const currentUrl = window.location.href;
 
@@ -59,6 +62,7 @@
     applyPageState();
   }
 
+  // 合并同一帧内的多次 DOM 变化，避免重复检测路由。
   function scheduleRouteRefresh() {
     if (routeRefreshQueued) {
       return;
@@ -71,11 +75,13 @@
     });
   }
 
+  // 更新内存中的开关状态并立即应用到页面。
   function setEnabled(value) {
     enabled = value !== false;
     applyPageState();
   }
 
+  // 从 chrome.storage 读取总开关，失败时恢复默认值。
   function loadSettings() {
     chrome.storage.sync.get(DEFAULT_SETTINGS, (settings) => {
       if (chrome.runtime.lastError) {
@@ -87,6 +93,7 @@
     });
   }
 
+  // 弹窗修改开关后，所有 B 站标签页通过存储事件同步状态。
   chrome.storage.onChanged.addListener((changes, areaName) => {
     if (areaName !== "sync" || !changes.enabled) {
       return;
@@ -98,7 +105,7 @@
   window.addEventListener("popstate", scheduleRouteRefresh, { passive: true });
   window.addEventListener("hashchange", scheduleRouteRefresh, { passive: true });
 
-  // Bilibili updates both the URL and DOM during in-site navigation.
+  // 监听 DOM 变化以捕获 B 站 SPA 的站内跳转。
   const routeObserver = new MutationObserver(scheduleRouteRefresh);
   routeObserver.observe(document, {
     childList: true,
