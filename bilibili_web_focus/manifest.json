@@ -13,7 +13,8 @@
   "content_scripts": [
     {
       "matches": [
-        "https://www.bilibili.com/*"
+        "https://*.bilibili.com/*",
+        "https://bilibili.com/*"
       ],
       "css": [
         "ext/content/core.css"

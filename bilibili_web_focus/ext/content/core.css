@@ -1,12 +1,100 @@
-:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"] {
-  overflow: hidden !important;
+/* 顶栏只保留中央搜索区域，隐藏左右导航与用户入口。 */
+:root[data-bili-focus-enabled="true"] .bili-header__bar > .left-entry,
+:root[data-bili-focus-enabled="true"] .bili-header__bar > .right-entry {
+  display: none !important;
 }
 
-:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"] body {
-  visibility: hidden !important;
+/* 直播页使用独立的顶栏结构，隐藏左右区域并居中保留搜索块。 */
+:root[data-bili-focus-enabled="true"] .link-navbar > .main-ctnr,
+:root[data-bili-focus-enabled="true"] .link-navbar > .right-part {
+  display: none !important;
+}
+
+:root[data-bili-focus-enabled="true"] .link-navbar > .search-block {
+  position: absolute !important;
+  top: 11px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+}
+
+/* 首页隐藏横幅、频道栏和主内容，只保留 64px 顶栏中的搜索框。 */
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"]
+  .bili-feed4
+  > .bili-header--large {
+  height: 64px !important;
+  min-height: 64px !important;
+}
+
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"]
+  .bili-feed4
+  > .bili-header
+  .bili-header__banner,
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"]
+  .bili-feed4
+  > .bili-header
+  .bili-header__channel,
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="home"]
+  .bili-feed4
+  > :not(.bili-header) {
+  display: none !important;
+}
+
+/* 搜索框为空时隐藏热搜面板；输入内容后允许搜索补全面板显示。 */
+:root[data-bili-focus-enabled="true"][data-bili-focus-search-empty="true"]
+  .nav-search-panel,
+:root[data-bili-focus-enabled="true"][data-bili-focus-search-empty="true"]
+  .search-panel-popover {
+  display: none !important;
+}
+
+/* 搜索框未输入时隐藏默认灰字，不修改实际搜索值。 */
+:root[data-bili-focus-enabled="true"] #nav-searchform input::placeholder,
+:root[data-bili-focus-enabled="true"] .nav-search-input::placeholder,
+:root[data-bili-focus-enabled="true"] .search-input-el::placeholder {
+  color: transparent !important;
+  opacity: 0 !important;
+}
+
+/* 视频页没有系列选集时隐藏整个侧边容器。 */
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"]
+  #mirror-vdcon
+  .right-container:not(:has(.video-pod)) {
+  display: none !important;
 }
 
 /*
- * Feature selectors for top bars, recommendations, comments, and search
- * suggestions will be added here behind the same reversible root state.
+ * 存在系列选集时保留右侧容器，只显示系列栏及其视频列表，
+ * 隐藏 UP 主面板、弹幕列表、普通推荐和广告。
  */
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"]
+  #mirror-vdcon
+  .right-container-inner
+  > :not(.rcmd-tab),
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"]
+  #mirror-vdcon
+  .rcmd-tab
+  > :not(.video-pod),
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"]
+  #mirror-vdcon
+  .video-card-ad-small,
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"]
+  #mirror-vdcon
+  .ad-report {
+  display: none !important;
+}
+
+/* 视频页隐藏标签栏和投稿活动栏，保留播放器与系列选集。 */
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"]
+  #mirror-vdcon
+  .video-tag-container,
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"]
+  #mirror-vdcon
+  .video-resource-list {
+  display: none !important;
+}
+
+/* 视频页隐藏整个评论区容器。 */
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"] #commentapp,
+:root[data-bili-focus-enabled="true"][data-bili-focus-page="video"] #comment {
+  display: none !important;
+}
